@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/contexts/UserContext";
 import { useAuth } from "@/contexts/auth";
-import { z } from "zod";
+
 
 type Veiculo = {
   id: string;
@@ -12,11 +12,6 @@ type Veiculo = {
   modelo: string;
 };
 
-// Define Zod schema for form validation
-const veiculoSchema = z.object({
-  placa: z.string().min(1).max(10),
-   modelo: z.string().min(1).regex(/^[a-zA-Z\s]+$/), 
-});
 
 const CadastroVeiculosPage: React.FC = () => {
   const router = useRouter();
@@ -27,17 +22,6 @@ const CadastroVeiculosPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [placa, setPlaca] = useState("");
   const [modelo, setModelo] = useState("");
-  const licensePlateSchema = z.string().regex(/^([A-Z]{3}\d{1}[A-Z0-9]{1}\d{2})$/);
-
-// Explanation of regex pattern:
-// - ^: Start of string
-// - [A-Z]{3}: Three uppercase letters
-// - \d{1}: One digit
-// - [A-Z0-9]{1}: One alphanumeric character (letter or digit)
-// - \d{2}: Two digits
-// - $: End of string
-
-// Other code remains unchanged...
 
   useEffect(() => {
     fetchVeiculos();
@@ -47,12 +31,12 @@ const CadastroVeiculosPage: React.FC = () => {
     try {
       const response = await fetch("/api/cadastro-veiculos");
       if (!response.ok) {
-        throw new Error("Erro ao buscar veículos");
+        throw new Error("Error fetching vehicles");
       }
       const data = await response.json();
       setVeiculos(data);
     } catch (error) {
-      console.error("Erro ao buscar veículos:", error);
+      console.error("Error fetching vehicles:", error);
     }
   };
 
@@ -61,28 +45,38 @@ const CadastroVeiculosPage: React.FC = () => {
   ) => {
     event.preventDefault();
     setLoading(true);
-
-
+    const target = event.target as typeof event.target & {
+      placa: { value: string };
+      modelo: { value: string };
+    };
+    const placa = target.placa.value;
+    const modelo = target.modelo.value;
+  
+    if (!placa.trim() || !modelo.trim()) {
+      setErrorMessage("Os campos Placa e Modelo não podem estar vazios.");
+      setLoading(false);
+      return;
+    }
+  
     try {
-      licensePlateSchema.parse(placa.toUpperCase());
-      const parsedData = veiculoSchema.parse({ placa, modelo });
-    
       const response = await fetch("/api/cadastro-veiculos", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(parsedData),
+        body: JSON.stringify({ placa, modelo }),
       });
       if (response.ok) {
-        const newVeiculo = await response.json();
         fetchVeiculos();
+        setPlaca("");
+        setModelo("");
       }
     } catch (error) {
-      const typedError = error as Error;
-      setErrorMessage("A placa não atende aos requisitos. Certifique-se de que a placa esteja no formato correto, por exemplo, Mercosul.");
-  }
-
+      setErrorMessage(
+        "Ocorreu um erro ao cadastrar o veículo. Por favor, tente novamente mais tarde."
+      );
+    }
+  
     setLoading(false);
   };
 

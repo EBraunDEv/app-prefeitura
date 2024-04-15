@@ -56,11 +56,11 @@ const PainelAdmin = () => {
                 throw new Error("Erro ao obter dados do Administrador");
             }
             const data = await response.json();
-            console.log("Dados retornados da API:", data);
+           
             // Certifique-se de que data.admin está definido e é uma matriz
             const adminData = data.infoAdmin || []; // Certifique-se de acessar os dados corretamente
             const user = adminData.length > 0 ? adminData[0] : null; // Acessando o primeiro item da matriz
-            console.log("Usuário encontrado:", user);
+            
             if (user) {
                 setUserData(user);
             } else {
@@ -86,10 +86,10 @@ const PainelAdmin = () => {
                     throw new Error("Erro ao obter agendamentos");
                 }
                 const data = await response.json();
-                console.log("Dados retornados da API:", data);
+               
                 // Certifique-se de que data.agendamentos está definido e é uma matriz
                 const agendamentosData = data.agendamentos || []; // Certifique-se de acessar os dados corretamente
-                console.log("Agendamentos encontrados:", agendamentosData);
+               
                 setAgendamentos(agendamentosData);
             } catch (error) {
                 console.error("Erro ao obter agendamentos:", error);

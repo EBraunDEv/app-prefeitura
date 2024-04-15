@@ -98,7 +98,7 @@ return (
   <div className="w-full sm:w-[800px] h-full sm:h-[800px] bg-white flex flex-col overflow-hidden">
     <nav className="p-4 bg-blue-500 text-white flex items-center justify-between">
       <span className="font-extrabold text-3xl pr-12">
-        Cadastro de Veículos
+        Cadastro de Motoristas
       </span>
       <div>
         <button
