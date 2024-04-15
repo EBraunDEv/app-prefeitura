@@ -1,0 +1,94 @@
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+
+model Admin {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  email    String   @unique
+  password String
+  name     String
+}
+
+model cidadao {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name              String?   
+  cpf               String?   @unique 
+  n_instalacao      String?   @unique 
+  telefone          String?   
+  endereco          String?   
+  n_casa            String?   
+  bairro            String?   
+  ponto_referencia  String?   
+  data_cadastro     DateTime? @default(now()) 
+  email             String?   @unique 
+  password          String?   
+}
+
+model servicos {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  tipo_servico      String?  
+ 
+}
+
+model secretarias {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  nome             String?   @unique
+  users            users[]
+}
+
+model agendamentos {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  chamados           Int?   // número do chamado
+  status              String?   
+  bairro              String?
+  endereco_agendamento String?   
+  n_agendamento       String?   //numero da residencia
+  ponto_referencia    String?   
+  tipo_servico        String?   //se e limpeza de fossa ou de caixa de esgoto
+  cidadao_cpf         String?   
+  name                String?   
+  telefone            String?   
+  observacao          String?   
+  motorista           String?   
+  obs_motorista       String?   
+  veiculo             String?   
+  dataAbertura        String?
+  dataAgendamento    String?  
+  dataRemarcacao      String?
+  dataExecucao       String? 
+  localidade          String?   // URBANO OU INTERIOR
+}
+
+model motorista {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  nome             String?   
+  cnh              String?   
+  telefone         String?   
+}
+
+model veiculo {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  placa            String?   
+  modelo           String?   
+}
+
+model users {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  nome             String?   
+  setor            String?   
+  email            String?   
+  password         String?   
+  secretarias      secretarias? @relation(fields: [setor], references: [nome], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model localidades {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  nome             String?   
+}
