@@ -1,4 +1,5 @@
 'use client'
+import ButtonActions from '@/components/Button-actions';
 import { useEffect, useRef, useState } from 'react';
 import ReactToPrint from 'react-to-print';
 
@@ -41,6 +42,12 @@ const ActionAgendarPage = () => {
         });
     }
   }, [id]);
+  
+  useEffect(() => {
+    if (agendamento) {
+      window.print();
+    }
+  }, [agendamento]);
 
   return (
     <div className="print-section">
@@ -156,6 +163,7 @@ const ActionAgendarPage = () => {
               trigger={() => <button className="no-print">Imprimir esta página</button>}
               content={() => componentRef.current}
             />
+            <ButtonActions />
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@ import { format } from "date-fns";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import { useRouter } from "next/navigation";
-import Link from 'next/link';
+import ButtonSair from "@/components/button-sair";
 
 
 
@@ -91,7 +91,6 @@ const ReportsPage = () => {
             item.name,
             item.telefone,
             item.endereco_agendamento,
-            item.dataAbertura ? format(new Date(item.dataAbertura), 'dd/MM/yyyy') : '',
             item.dataExecucao ? format(new Date(item.dataExecucao), 'dd/MM/yyyy') : '', 
           ]);
         });
@@ -242,11 +241,12 @@ doc.text(
       <div className="flex flex-col items-center min-h-screen  bg-gray-200  px-8">
         <Image src="/img/Brasao-Soo.png" alt="Logo" width={150} height={90}  className= "mt-6"/>
         <div className=" ">
+        
           <div className="text-center space-y-6">
             <h1 className="text-3xl font-bold mb-4">Relatórios</h1>
             
             <form>
-              <div className="mb-4">
+            <div className="mb-4">
                 <label htmlFor="startDate">Data Inicial:</label>
                 <input
                   type="date"
@@ -266,6 +266,7 @@ doc.text(
                   onChange={(e) => setEndDate(e.target.value)}
                 />
               </div>
+            
               <div className="mb-4">
                 <label htmlFor="searchTerm">Localizar:</label>
                 <input
@@ -290,16 +291,15 @@ doc.text(
               >
                 Pesquisar
               </button>
+
+              < ButtonSair />
       
-              <Link href="/painel-admin">
-        <button className="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-1 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-6 py-2.5 text-center mb-5">
-          Voltar
-        </button>
-      </Link>
+          
             
   
            
             </form>
+            
           
 
             <div>

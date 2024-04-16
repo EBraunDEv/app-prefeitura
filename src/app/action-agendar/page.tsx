@@ -44,6 +44,7 @@ const AgendamentoPage: React.FC = () => {
     resolver: zodResolver(schema),
   });
 
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -99,12 +100,11 @@ const AgendamentoPage: React.FC = () => {
     }
   };
 
-  
 
   return (
     <div className="w-[900px] h-[900px] bg-white flex flex-col mx-auto mt-4">
       <nav className="p-4 bg-blue-500 text-white flex items-center justify-center w-full  mr-4 ">
-        <h1 className="text-3xl font-bold">Marcação de Atendimento</h1>
+        <h1 className="text-3xl font-bold">Marcação de Agendamento</h1>
         <ButtonActions />
       </nav>
     

@@ -80,6 +80,7 @@ const CidadaoCard: React.FC<CidadaoCardProps> = ({ storedCpf }) => {
             <p>Status: {agendamento.status}</p>
             <p>Data da Solicitação: {agendamento.dataAbertura}</p>
             <p>Data de Agendamento: {agendamento.dataAgendamento}</p>
+            <p>Data de Conclusão:{agendamento.dataExecucao}</p>
           </div>
         </div>
 

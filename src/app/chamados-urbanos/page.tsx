@@ -85,8 +85,8 @@ const Formulario = () => {
 
 
   const localidades = [
-    { id: '661d57fdd8e9cb5347302114', nome: 'Interior' },
-    { id: '661d5807d8e9cb5347302115', nome: 'Urbano' },
+    { id: '1', nome: 'Interior' },
+    { id: '2', nome: 'Urbano' },
     // ...
   ];
   const getLocalidadeNomeById = (id: string) => {

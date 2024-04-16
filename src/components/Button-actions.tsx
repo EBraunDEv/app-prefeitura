@@ -11,7 +11,7 @@ const ButtonActions: React.FC = () => {
 
     return (
         <button
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-12"
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-12 no-print"
             onClick={handleButtonClick}
         >
             Sair

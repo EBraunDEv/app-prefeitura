@@ -43,39 +43,39 @@ export async function GET(req: NextRequest) {
     }
 
 
-export async function PATCH(req: NextRequest) {
-    try {
-        const { id, status, motorista, veiculo, dataAgendamento} = await req.json();
-
-        const formattedDate = new Date(dataAgendamento).toLocaleDateString('pt-BR', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-          }).replace(/\//g, '-'); // Replace '/' with '-' for consistency if needed
-
-        const agendamento = await prisma.agendamentos.update({
-            where: {
-                id,
-            },
-            data: {
-                status,
-                motorista,
-                veiculo,
-                dataAgendamento: formattedDate,
-            },
-        });
-
-        return NextResponse.json({ agendamento });
-    } catch (error) {
-        console.error("Erro ao atualizar o agendamento:", error);
-
-        return NextResponse.json(
-            {
-                message: "Erro ao atualizar o agendamento",
-            },
-            {
-                status: 500,
-            }
-        );
+    export async function PATCH(req: NextRequest) {
+        try {
+            const { id, status, motorista, veiculo, dataAgendamento } = await req.json();
+    
+            const formattedDate = new Date(dataAgendamento).toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+            }).replace(/\//g, '-'); // Replace '/' with '-' for consistency if needed
+    
+            const agendamento = await prisma.agendamentos.update({
+                where: {
+                    id,
+                },
+                data: {
+                    status,
+                    motorista,
+                    veiculo,
+                    dataAgendamento:formattedDate,
+                },
+            });
+    
+            return NextResponse.json({ agendamento });
+        } catch (error) {
+            console.error("Erro ao atualizar o agendamento:", error);
+    
+            return NextResponse.json(
+                {
+                    message: "Erro ao atualizar o agendamento",
+                },
+                {
+                    status: 500,
+                }
+            );
+        }
     }
-}

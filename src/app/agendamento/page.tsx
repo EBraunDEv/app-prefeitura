@@ -85,12 +85,12 @@ export default function AgendamentoPage() {
   }
 
   return (
-    <div className="w-[900px] h-[900px] bg-white flex flex-col mx-auto mt-4">
+    <div className="w-[1000px] h-[1000px] bg-white flex flex-col mx-auto mt-4">
       <nav className="p-4 bg-blue-500 text-white flex items-center justify-center w-full  mr-4 ">
         <h1 className="text-3xl font-bold">Sistema de Chamados</h1>
         <ButtonSair />
       </nav>
-      <div className="mt-8 ml-4 mr-4 bg-slate-200 mb-8 w-[800] h-[800]">
+      <div className="mt-8 ml-4 mr-4 bg-slate-200 mb-8 w-[900] h-[800]">
       <div className="mb-4  mr-4 ml-2 mt-4 flex ">
       <table className="table-auto border-collapse border border-gray-200">
         <thead className="bg-gray-200">

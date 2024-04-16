@@ -1,6 +1,6 @@
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgres"
   url      = env("DATABASE_URL")
 }
 
@@ -10,14 +10,14 @@ generator client {
 
 
 model Admin {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+   id       Int      @id @default(autoincrement())
   email    String   @unique
   password String
   name     String
 }
 
 model cidadao {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+   id       Int      @id @default(autoincrement())
   name              String?   
   cpf               String?   @unique 
   n_instalacao      String?   @unique 
@@ -32,19 +32,19 @@ model cidadao {
 }
 
 model servicos {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+   id       Int      @id @default(autoincrement())
   tipo_servico      String?  
  
 }
 
 model secretarias {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+   id       Int      @id @default(autoincrement())
   nome             String?   @unique
   users            users[]
 }
 
 model agendamentos {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+   id       Int      @id @default(autoincrement())
   chamados           Int?   // número do chamado
   status              String?   
   bairro              String?
@@ -67,20 +67,20 @@ model agendamentos {
 }
 
 model motorista {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+   id       Int      @id @default(autoincrement())
   nome             String?   
   cnh              String?   
   telefone         String?   
 }
 
 model veiculo {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+   id       Int      @id @default(autoincrement())
   placa            String?   
   modelo           String?   
 }
 
 model users {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+   id       Int      @id @default(autoincrement())
   nome             String?   
   setor            String?   
   email            String?   
@@ -89,6 +89,6 @@ model users {
 }
 
 model localidades {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+   id       Int      @id @default(autoincrement())
   nome             String?   
 }
